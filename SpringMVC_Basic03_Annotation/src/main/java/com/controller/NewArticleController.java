@@ -1,14 +1,11 @@
 package com.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.model.NewArticleCommand;
 import com.service.ArticleService;
@@ -58,10 +55,16 @@ public class NewArticleController {
 	
 	//@RequestMapping(method = RequestMethod.POST)
 		@PostMapping  //5.x.x
-		public String sumbit(NewArticleCommand command) { //처리 
+		public String sumbit(@ModelAttribute("Articledata") NewArticleCommand command) { //처리 
 			System.out.println("POST 처리해주세요");
 			
 			this.articleService.writeArticle(command);
+			
+			//ModelAndView mv = new ModelAndView();
+			//mv.addObject("newArticleCommand", command);
+			//생략 자동 생성 .....
+			
+			//뷰 key : NewArticleCommand >> newArticleCommand
 			
 			return "article/newArticleSubmitted";
 		}
