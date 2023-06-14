@@ -47,4 +47,5 @@
 	 -->
 	 
 	 <bean class="com.controller.NewArticleController"></bean>
+	 <bean class="com.service.ArticleService"></bean>
 </beans>
