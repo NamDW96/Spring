@@ -51,4 +51,7 @@
 	 
 	 <!-- TEST_3 -->
 	 <bean class="com.controller.OrderController"></bean>
+	 
+	 <!-- TEST_4 -->
+	 <bean class="com.controller.SearchController"></bean>
 </beans>

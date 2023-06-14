@@ -1,10 +1,35 @@
 package com.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class SearchController {
-
+	/*
+	@RequestMapping("/search/external.do")
+	public ModelAndView searchExternal(String id, String name, int age) {
+		
+		System.out.println("id : " + id);
+		System.out.println("name : " +name );
+		System.out.println("age : " + age);
+		return new ModelAndView("search/external"); //view 주소
+		//public String ... return "뷰주소" 권장
+	}*/
+	
+	@RequestMapping("/search/external.do")
+	public ModelAndView searchExternal(@RequestParam(value="query", defaultValue="kosa")String query,
+									   @RequestParam(value="p", defaultValue="1")int p) 
+	{
+		
+		System.out.println("param query : " + query);
+		System.out.println("param p : " + p);
+		
+		return new ModelAndView("search/external"); //view 주소
+		//public String ... return "뷰주소" 권장
+	}
+	
 	/*
 	 1. 전통적인 방법
 	 public ModelAndView searchExternal(HttpServletRequest request) {
@@ -18,7 +43,7 @@ public class SearchController {
 	      private String id;
 	      private String name;
 	       
-	  }
+	  } 글쓰기, 수정하기 와 같은 
 	  
 	  3. 가장 만만한 방법 
 	   public ModelAndView searchExternal(String id, String name , int age){
