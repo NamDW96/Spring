@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<div id="header">
-		<div class="top-wrapper">
+			<div class="top-wrapper">
 				<h1 id="logo"><a href="/"><img src="" alt="로고" /></a></h1>
 				<h2 class="hidden">메인메뉴</h2>
 				<ul id="mainmenu" class="block_hlist">
@@ -69,33 +69,24 @@
 					<h2>공지사항</h2>
 					<h3 class="hidden">방문페이지위치</h3>
 					<ul id="breadscrumb" class="block_hlist">
-						<li id="home">
-							<a href="">HOME</a>
+						<li>HOME</li>
+						<li>
+							고객센터
 						</li>
 						<li>
-							<a href="">고객센터</a>
-						</li>
-						<li>
-							<a href="">공지사항</a>
+							공지사항수정
 						</li>
 					</ul>
+						<form action="" method="post"  enctype="multipart/form-data">
 					<div id="notice-article-detail" class="article-detail margin-large" >						
 						<dl class="article-detail-row">
 							<dt class="article-detail-title">
 								제목
 							</dt>
 							<dd class="article-detail-data">
-								${notice.title}
+								&nbsp;<input name="title" value="${notice.title}" />
 							</dd>
-						</dl>
-						<dl class="article-detail-row">
-							<dt class="article-detail-title">
-								작성일
-							</dt>
-							<dd class="article-detail-data">
-								${notice.regdate}
-							</dd>
-						</dl>
+						</dl>	
 						<dl class="article-detail-row half-row">
 							<dt class="article-detail-title">
 								작성자
@@ -114,40 +105,33 @@
 						</dl>
 						<dl class="article-detail-row">
 							<dt class="article-detail-title">
+								첨부파일_1
+							</dt>
+							<dd class="article-detail-data">
+								&nbsp;<input type="file" id="txtFile" name="files[0]" />
+								          ${notice.fileSrc}
+							</dd>
+						</dl>
+						<dl class="article-detail-row">
+							<dt class="article-detail-title">
 								첨부파일
 							</dt>
 							<dd class="article-detail-data">
-								<a href="">${notice.fileSrc}</a>
+								&nbsp;<input type="file" id="txtFile" name="files[1]" />
+								          ${notice.fileSrc2}
 							</dd>
 						</dl>
-
 						<div class="article-content" >
-							${notice.content}
-						</div>
+							<textarea id="txtContent" class="txtContent" name="content">
+								${notice.content}
+							</textarea>
+						</div>						
 					</div>
 					<p class="article-comment margin-small">
-						<a class="btn-list button" href="notice.htm?pg">목록</a>						
-						<a class="btn-edit button" href="noticeEdit.htm?seq=${notice.seq}">수정</a>
-						<a class="btn-del button" href="noticeDel.htm?seq=${notice.seq}">삭제</a>
-					</p>
-					<div class="margin-small" style="border-top: 1px solid #dfdfdf;">
-						<dl class="article-detail-row">
-							<dt class="article-detail-title">
-								▲ 다음글
-							</dt>
-							<dd class="article-detail-data">
-								다음 글이 없습니다.
-							</dd>
-						</dl>
-						<dl class="article-detail-row">
-							<dt class="article-detail-title">
-								▼ 이전글
-							</dt>
-							<dd class="article-detail-data">
-								1회 경진대회
-							</dd>
-						</dl>
-					</div>					
+						<input type="submit"   value="수정"  class="btn-save button" />
+						<a class="btn-cancel button" href="noticeDetail.htm?seq=${notice.seq}">취소</a>						
+					</p>		
+					</form>						
 				</div>				
 				<div id="navi">
 					<h2>고객센터</h2>
