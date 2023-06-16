@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- bean 생성 -->
+	<bean id="helloService" class="kr.or.kosa.HelloService" />
+	<bean id="helloController" class="kr.or.kosa.HelloController">
+		<property name="helloService" ref="helloService"/>
+	</bean>
+	<bean id="helloLog" class="kr.or.kosa.HelloLog"/>
+	<bean id="performanceAspect" class="kr.or.kosa.PerformanceAspect"/>
+	
+	<aop:config>
+    	
+		<!-- after 동작   
+		<aop:aspect ref="helloLog">
+       	 	<aop:after pointcut-ref="hello" method="log"/>
+    	</aop:aspect>  
+    	-->
+  	 
+  
+ 		<!-- 포인트 컷 설정
+        <aop:pointcut  id="hello" 
+    		expression="execution(* kr.or.kosa.HelloController.hello(..))"/>
+    		
+    	<aop:pointcut id="except" 
+    		expression="execution(* kr.or.kosa.HelloController.except(..))" />
+    	-->	
+    	
+    	<!-- after-throwing 
+    		
+    	<aop:aspect ref="helloLog">
+       	 	<aop:after-throwing pointcut-ref="except" method="exceptionLog"/>
+    	</aop:aspect>
+    	 -->
+    	
+		<!-- after-returning  
+		
+    	<aop:aspect ref="helloLog">
+       	 	<aop:after-returning pointcut-ref="hello" method="afterReturningLog"/>
+    	</aop:aspect>
+    	 -->
+    	 
+    	 <aop:pointcut id="helloPointcut"
+    		expression="execution(* kr.or.kosa.HelloController.hello(..))" />
+    		
+    	<aop:aspect ref="performanceAspect">
+    		<aop:around pointcut-ref="helloPointcut" method="trace"/>
+    	</aop:aspect> 
+
+    	</aop:config>
+
+</beans>
