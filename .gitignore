@@ -1,0 +1,9 @@
+.metadata/
+Servers/
+.classpath
+.project
+.settings/
+*.jar
+.MF
+*.png
+*.jpg
