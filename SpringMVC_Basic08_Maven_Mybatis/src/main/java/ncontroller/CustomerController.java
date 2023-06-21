@@ -1,12 +1,10 @@
 package ncontroller;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import dao.NoticeDao;
 import service.CustomerService;
 import vo.Notice;
 
@@ -87,6 +83,12 @@ public class CustomerController {
 	@GetMapping("noticeDel.htm")
 	public String noticeDel(String seq) {
 		return customerservice.noticeDel(seq);
+	}
+	
+	//파일 다운로드
+	@RequestMapping("download.htm")
+	public void download(String p , String f , HttpServletRequest request , HttpServletResponse response) throws IOException {
+		  customerservice.download(p, f, request, response);
 	}
 	
 }
