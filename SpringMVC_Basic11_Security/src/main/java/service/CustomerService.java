@@ -3,6 +3,7 @@ package service;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +94,7 @@ public class CustomerService {
 
 	}
 
-	public String noticeReg(Notice n, HttpServletRequest request) {
+	public String noticeReg(Notice n, HttpServletRequest request ,Principal principal) {
 
 		List<CommonsMultipartFile> files = n.getFiles();
 		List<String> filenames = new ArrayList<String>(); // 파일명들 관리
@@ -128,20 +129,24 @@ public class CustomerService {
 				}
 			}
 		}
-		///////////////////////////////////////////////////
+		////////////////////////////////////////////////////////
 		//Spring security 인증정보 가져오기
-		// /login (인증처리 .... 필요한 객체 만들고 ..... 저장)
+		// /login (인증처리 .... 필요한 객체 만들고 .... 저장)
 		
-		SecurityContext context =SecurityContextHolder.getContext(); // 모든 시큐리티 정보를 가지고 와
-		Authentication auth = context.getAuthentication(); //인증관련된 것만 추철
+		/*
+		SecurityContext context = SecurityContextHolder.getContext(); // 모든 시큐리티 정보를 가지고 와서
+		Authentication auth = context.getAuthentication(); //인증관련된 것만 추출
+		UserDetails userinfo  =(UserDetails)auth.getPrincipal();
 		
-		UserDetails userinfo = (UserDetails)auth.getPrincipal();
+		System.out.println("권한정보 : " + userinfo.getAuthorities() );  //인증된 사용자의 권한 정보
+		System.out.println("사용자ID : " + userinfo.getUsername());     //인증된 사용자 ID
 		
-		System.out.println("권한정보 : " + userinfo.getAuthorities() ); //인증된 사용자의 권한 정보
-		System.out.println("사용자ID : " + userinfo.getUsername());  //인증된 사용자 ID
 		
-		n.setWriter(userinfo.getUsername()); //인증된 사용자 ID
-		///////////////////////////////////////////////////
+		n.setWriter(userinfo.getUsername()); //인증된 사용자 ID 
+		*/
+		n.setWriter(principal.getName()); // 나는 사용자 ID 필요 
+		//public String noticeReg(Notice n, HttpServletRequest request ,Principal principal)
+		/////////////////////////////////////////////////////////
 		n.setFileSrc(filenames.get(0));
 		n.setFileSrc2(filenames.get(1));
 
